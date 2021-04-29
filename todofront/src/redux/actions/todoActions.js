@@ -11,3 +11,10 @@ export const remove = (id) => {
     id: id,
   };
 };
+
+export const toggle = (id) => {
+  return {
+    type: "TOGGLE_TODO",
+    id: id,
+  };
+};

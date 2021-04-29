@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //actions
-import { remove } from "../redux/actions/todoActions";
+import { remove, toggle } from "../redux/actions/todoActions";
 //styles
 import {
   SMButton,
@@ -18,8 +18,9 @@ const TodoItem = ({ title, id }) => {
   const handleDelete = (id) => {
     dispatch(remove(id));
   };
-  const handleSelected = () => {
+  const handleSelected = (id) => {
     setIsCompleted(!isCompleted);
+    dispatch(toggle(id));
   };
   return (
     <ItemContainer>
@@ -27,7 +28,7 @@ const TodoItem = ({ title, id }) => {
         <CheckBox
           type="checkbox"
           value={isCompleted}
-          onChange={handleSelected}
+          onChange={() => handleSelected(id)}
         />
         {isCompleted ? (
           <Text style={{ textDecorationLine: "line-through" }}>{title}</Text>
@@ -36,7 +37,7 @@ const TodoItem = ({ title, id }) => {
         )}
       </Header>
       {isCompleted ? (
-        <DisabledButton>Delete</DisabledButton>
+        <DisabledButton disabled>Delete</DisabledButton>
       ) : (
         <SMButton onClick={() => handleDelete(id)}>Delete</SMButton>
       )}
