@@ -51,7 +51,12 @@ const TodoInput = ({ loading, setLoading, fetchItems }) => {
   return (
     <>
       <form style={{ display: "flex", flexDirection: "row" }}>
-        <Input type="text" value={todo} onChange={handleOnChange} />
+        <Input
+          type="text"
+          maxLength="15"
+          value={todo}
+          onChange={handleOnChange}
+        />
         <Button onClick={(e) => handleAdd(e)}>Submit</Button>
       </form>
     </>

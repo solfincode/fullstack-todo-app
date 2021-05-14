@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 500px;
   margin: 50px auto;
   padding: 15px;
   border-radius: 10px;
   color: white;
   background-color: var(--brand-primary-blue);
-  @media (max-width: 500px) {
+  @media (min-width: 300px) {
+    width: 342px;
+  }
+  @media (min-width: 500px) {
     width: 380px;
+  }
+  @media (min-width: 648px) {
+    width: 500px;
   }
 `;
 
@@ -43,6 +48,7 @@ export const Button = styled.button`
 export const Text = styled.p`
   color: white;
   font-size: 1.2em;
+  margin-top: 8px;
 `;
 
 export const ItemContainer = styled.div`
@@ -51,6 +57,7 @@ export const ItemContainer = styled.div`
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.4);
   padding: 8px;
+  height: 60px;
   margin: 20px 0px;
   border-radius: 7px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -63,29 +70,37 @@ export const Header = styled.div`
 
 export const SMButton = styled.button`
   background-color: var(--brand-secondary-yellow);
-  width: 100px;
-  padding: 8px;
+
   border-radius: 7px;
   color: var(--brand-dark-blue);
   cursor: pointer;
   text-align: center;
-  margin: 12px;
-  font-size: 0.8em;
   border: none;
   font-weight: bold;
+  @media (min-width: 300px) {
+    width: 60px;
+    font-size: 0.7rem;
+    padding: 5px;
+    margin: 9px 5px;
+    height: 25px;
+  }
 `;
 
 export const DisabledButton = styled.button`
   background-color: var(--brand-disabled);
-  width: 100px;
-  padding: 8px;
   border-radius: 7px;
   color: black;
   text-align: center;
-  margin: 12px;
   font-size: 0.8em;
   border: none;
   font-weight: bold;
+  @media (min-width: 300px) {
+    width: 60px;
+    font-size: 0.7rem;
+    padding: 5px;
+    margin: 9px 5px;
+    height: 25px;
+  }
 `;
 
 export const BottomContainer = styled.div`
@@ -93,6 +108,5 @@ export const BottomContainer = styled.div`
 `;
 
 export const CheckBox = styled.input`
-  margin-right: 20px;
-  top: 20px;
+  margin: 11px 20px 0 0;
 `;
