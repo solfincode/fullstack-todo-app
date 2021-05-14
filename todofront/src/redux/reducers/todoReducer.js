@@ -1,6 +1,4 @@
-import data from "../../utils/DATA";
-
-const todoReducer = (state = data, action) => {
+const todoReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, action.payload];
@@ -12,6 +10,8 @@ const todoReducer = (state = data, action) => {
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
       );
       return newState;
+    case "SET_TODO":
+      return action.todos;
     default:
       return state;
   }

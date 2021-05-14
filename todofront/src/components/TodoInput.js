@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 //actions
@@ -7,12 +7,33 @@ import { add } from "../redux/actions/todoActions";
 //styles
 import { Button, Input } from "../assests/styles";
 
-const TodoInput = () => {
+const TodoInput = ({ loading, setLoading, fetchItems }) => {
   const [todo, setTodo] = useState("");
   const dispatch = useDispatch();
+
+  const UpdateItems = useCallback(
+    (newItem) => {
+      fetch(process.env.REACT_APP_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      })
+        .then((data) => {
+          fetchItems();
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
+      setLoading(true);
+    },
+    [fetchItems, setLoading]
+  );
+
   const handleOnChange = (e) => {
     setTodo(e.target.value);
   };
+
   const handleAdd = (e) => {
     e.preventDefault();
 
@@ -20,8 +41,9 @@ const TodoInput = () => {
       const newTodo = {
         id: new Date().getTime().toString(),
         title: todo,
-        completed: false,
+        done: false,
       };
+      UpdateItems(newTodo);
       dispatch(add(newTodo));
     }
     setTodo("");

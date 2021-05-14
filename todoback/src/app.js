@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 //port
-const port = 8000;
+const port = process.env.PORT || 8000;
 //app
 const app = express();
 
@@ -16,7 +16,7 @@ dotenv.config();
 
 //routes
 app.use("/", require("./routes/HomeRoutes"));
-app.use("/todolist", require("./routes/TodoPostRoutes"));
+app.use("/api/v1/todolist", require("./routes/TodoPostRoutes"));
 
 //mongoose
 const uri = process.env.URI;

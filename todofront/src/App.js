@@ -1,23 +1,57 @@
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
 //components
 import TodoInput from "./components/TodoInput";
 import TodoItem from "./components/TodoItem";
 import TodoTotal from "./components/TodoTotal";
 //styles
-import { Container } from "./assests/styles";
+import { Container, MainHeader } from "./assests/styles";
 import "./App.css";
 
+//action
+import { setTodo } from "./redux/actions/todoActions";
+
 function App() {
-  const todos = useSelector((state) => state.todos);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const todoItems = useSelector((state) => state.todos);
+
+  //fetch items
+  const fetchItems = useCallback(() => {
+    fetch(process.env.REACT_APP_API_URL)
+      .then((response) => response.json())
+      .then((items) => dispatch(setTodo(items)))
+      .catch((err) => console.log(err));
+  }, [dispatch]);
+
+  //useEffect
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
   return (
     <Container>
-      <h2>My Todo App</h2>
-      <TodoInput />
-      {todos.map((todo) => {
-        return <TodoItem title={todo.title} id={todo.id} key={todo.id} />;
+      <MainHeader>
+        <h2>My Todo App</h2>
+        {loading ? <p>loading...</p> : ""}
+      </MainHeader>
+      <TodoInput
+        loading={loading}
+        setLoading={setLoading}
+        fetchItems={fetchItems}
+      />
+      {todoItems.map((todo) => {
+        return (
+          <TodoItem
+            title={todo.title}
+            id={todo._id}
+            key={todo._id}
+            loading={loading}
+            setLoading={setLoading}
+            fetchItems={fetchItems}
+          />
+        );
       })}
-      <TodoTotal number={todos.length} />
+      <TodoTotal number={todoItems.length} />
     </Container>
   );
 }

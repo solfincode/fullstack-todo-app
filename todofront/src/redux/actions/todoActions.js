@@ -18,3 +18,10 @@ export const toggle = (id) => {
     id: id,
   };
 };
+
+export const setTodo = (items) => {
+  return {
+    type: "SET_TODO",
+    todos: items,
+  };
+};

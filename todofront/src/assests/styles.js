@@ -12,6 +12,11 @@ export const Container = styled.div`
   }
 `;
 
+export const MainHeader = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+`;
 export const Input = styled.input`
   width: 70%;
   padding: 10px;
