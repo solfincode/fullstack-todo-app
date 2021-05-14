@@ -30,7 +30,7 @@ export const Input = styled.input`
   border: none;
   color: white;
   caret-color: var(--brand-secondary-yellow);
-  font-size: 1.3em;
+  font-size: 1em;
 `;
 export const Button = styled.button`
   background-color: var(--brand-secondary-yellow);

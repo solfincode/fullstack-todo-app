@@ -53,8 +53,9 @@ const TodoInput = ({ loading, setLoading, fetchItems }) => {
       <form style={{ display: "flex", flexDirection: "row" }}>
         <Input
           type="text"
-          maxLength="15"
+          maxLength="25"
           value={todo}
+          placeholder="text limit is 25 characters"
           onChange={handleOnChange}
         />
         <Button onClick={(e) => handleAdd(e)}>Submit</Button>
