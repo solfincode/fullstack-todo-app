@@ -5,7 +5,7 @@ import TodoInput from "./components/TodoInput";
 import TodoItem from "./components/TodoItem";
 import TodoTotal from "./components/TodoTotal";
 //styles
-import { Container, MainHeader } from "./assests/styles";
+import { Container, MainHeader, SMButton } from "./assests/styles";
 import "./App.css";
 
 //action
@@ -21,18 +21,20 @@ function App() {
     fetch(process.env.REACT_APP_API_URL)
       .then((response) => response.json())
       .then((items) => dispatch(setTodo(items)))
+      .then((data) => setLoading(false))
       .catch((err) => console.log(err));
   }, [dispatch]);
 
   //useEffect
   useEffect(() => {
     fetchItems();
+    setLoading(true);
   }, [fetchItems]);
   return (
     <Container>
       <MainHeader>
         <h2>My Todo App</h2>
-        {loading ? <p>loading...</p> : ""}
+        {loading ? <SMButton loading>loading...</SMButton> : ""}
       </MainHeader>
       <TodoInput
         loading={loading}

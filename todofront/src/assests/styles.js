@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   margin: 50px auto;
@@ -69,16 +69,17 @@ export const Header = styled.div`
 `;
 
 export const SMButton = styled.button`
-  background-color: var(--brand-secondary-yellow);
-
+  ${(props) =>
+    props.loading
+      ? "background-color: var(--brand-warning-red);color: white;"
+      : "background-color: var(--brand-secondary-yellow);color: var(--brand-dark-blue);"}
   border-radius: 7px;
-  color: var(--brand-dark-blue);
   cursor: pointer;
   text-align: center;
   border: none;
   font-weight: bold;
   @media (min-width: 300px) {
-    width: 60px;
+    ${(props) => (props.loading ? "width: 70px;" : "width: 60px;")}
     font-size: 0.7rem;
     padding: 5px;
     margin: 9px 5px;
